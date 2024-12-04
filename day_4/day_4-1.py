@@ -20,31 +20,24 @@ def get_diagonals(lines):
 
     return fdiag, bdiag
 
+def add_count(lines):
+    global sum
+    for row in lines:
+        line = ''.join(list(row))
+        sum += count_XMAS(line)
 
-with open('input_test-1.txt') as f:
+
+with open('input.txt') as f:
     lines = f.readlines()
 
 sum = 0
 
-# horizontal
-for line in lines:
-    line = line.strip()
-    sum += count_XMAS(line)
+lines = np.array([list(l.strip()) for l in lines])
+fdiag, bdiag = get_diagonals(lines)
 
-# vertical (transpose original input)
-lines_T = np.array([list(l.strip()) for l in lines]).T
-for row in lines_T:
-    line = ''.join(list(row))
-    sum += count_XMAS(line)
-
-fdiag, bdiag = get_diagonals(lines_T.T)
-
-for row in fdiag:
-    line = ''.join(list(row))
-    sum += count_XMAS(line)
-
-for row in bdiag:
-    line = ''.join(list(row))
-    sum += count_XMAS(line)
+add_count(lines)
+add_count(lines.T)
+add_count(fdiag)
+add_count(bdiag)
 
 print(sum)
