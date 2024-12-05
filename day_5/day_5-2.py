@@ -40,6 +40,7 @@ for update in updates:
     if ok:
         sum += int(update[math.floor((len(update)-1)/2)])
     else:
+        for i in range(len(update)):
 
 
 print(sum)
